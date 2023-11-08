@@ -10,6 +10,6 @@
 <h1>내 작성 게시글</h1>
 <p>제목 : <%= session.getAttribute("BOARD_TITLE") %></p>
 <p>본문 : <%= session.getAttribute("BOARD_TEXT") %></p>
-<p>글쓴날짜 : <%= session.getAttribute("BOARD_DATE") %></p>
+<button><a href="register.jsp"></a>뒤로가기</button>
 </body>
 </html>

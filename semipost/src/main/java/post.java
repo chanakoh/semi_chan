@@ -2,9 +2,9 @@
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Servlet implementation class post
+ */
+@WebServlet("/post")
+public class post extends HttpServlet {
 
-@WebServlet("/semiServlet")
-public class semiServlet extends HttpServlet {
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url ="jdbc:oracle:thin:@localhost:1521:xe";
 		String user ="thirties";
@@ -31,33 +33,23 @@ public class semiServlet extends HttpServlet {
 		try {
 			Connection connection = DriverManager.getConnection(url, user, pw);
 			
-			String btitle = request.getParameter("BOARD_TITLE");
-			String btext = request.getParameter("BOARD_TEXT");
-			String bID = request.getParameter("ACCOUNT_ID");
-			
-			//ȸ������ \insert
-			
-			String sql = "INSERT INTO BOARDONE(BOARD_TITLE,BOARD_TEXT,ACCOUNT_ID) VALUES(?,?,?)";
+			String btitle = request.getParameter("board_title");
+			String btext= request.getParameter("board_text");
+		
+			String sql = "SELECT * FROM BOARDONE WHERE BOARD_TITLE =? AND BOARD_TEXT = ?";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1,btitle);
-			preparedStatement.setString(2,btext);
-			preparedStatement.setString(3,bID);
-		
-			preparedStatement.executeUpdate();
-		
-			request.getSession().setAttribute("BOARD_TITLE",btitle);
-			request.getSession().setAttribute("BOARD_TEXT", btext);
-			request.getSession().setAttribute("ACCOUNT_ID", bID);
-		
-			response.sendRedirect("register_sucess.jsp");
-		
+			preparedStatement.setString(2, btext);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			response.sendRedirect("register_error.jsp");
 			e.printStackTrace();
 		}
 		
-	}
-
+}
+	
 }
