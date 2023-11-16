@@ -5,27 +5,41 @@ import java.sql.Date;
 
 public class Board {
 	private int boardno;
-	
 	private String boardTitle;
 	private String boardText;
 	private Date boardtime;
 	private String bid;
+	private int boardhit;
 	
-	
-	public Board(int boardno,String boardTitle,Date boardtime,String bid){
+
+	public Board() {
+		super();
+	}
+	public Board(String bid) {
+		this.bid = bid;
+	}
+	public Board(int boardno,String boardTitle,Date boardtime,String bid,int boardhit){
+		super();
 		this.boardno=boardno;
 		this.boardTitle=boardTitle;
 		this.boardtime = boardtime;
 		this.bid=bid;
+		this.boardhit=boardhit;
 	}	
-		public Board(String boardTitle,String boardText){
-		
-			this.boardTitle=boardTitle;
-			this.boardText=boardText;
-			
-		
+	public Board(String boardTitle,String boardText,int boardhit){
+		super();
+		this.boardTitle=boardTitle;
+		this.boardText=boardText;
+		this.boardhit=boardhit;
+	}
+	public Board( int boardno,String boardTitle, String boardText) {
+		super();
+		this.boardno=boardno;
+		this.boardTitle=boardTitle;
+		this.boardText=boardText;
 		
 	}
+		
 	public int getBoardno() {
 		return boardno;
 	}
@@ -68,6 +82,11 @@ public class Board {
 		this.bid = bid;
 	}
 
-	
+	public int getBoardhit() {
+		return boardhit;
+	}
+	public void setBoardhit(int boardhit) {
+		this.boardhit = boardhit;
+	}
 	
 }

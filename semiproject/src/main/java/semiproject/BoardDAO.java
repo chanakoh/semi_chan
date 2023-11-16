@@ -28,7 +28,7 @@ public class BoardDAO {
 		List<Board> boards = new ArrayList<>();
 		try {
 			Connection connection = DriverManager.getConnection(url, user, pw);
-			String sql = "SELECT * FROM BOARDONE";
+			String sql = "SELECT * FROM BOARD";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet resultSet = ps.executeQuery();
 			
@@ -37,7 +37,8 @@ public class BoardDAO {
 				String boardTitle = resultSet.getString("BOARD_TITLE");
 				Date boardtime = resultSet.getDate("BOARD_TIME");
 				String bid = resultSet.getString("ACCOUNT_ID");
-				Board board = new Board(boardno,boardTitle,boardtime,bid);
+				int boardhit = resultSet.getInt("BOARD_HIT");
+				Board board = new Board(boardno,boardTitle,boardtime,bid,boardhit);
 				boards.add(board);
 				
 			}
@@ -50,19 +51,23 @@ public class BoardDAO {
 	}
 	
 	
-	public Board getBoardTitle(String boardTitle ) {
+
+	public Board getBoardno(int boardno ) {
 		Board board = null;
 		try {
 			Connection connection = DriverManager.getConnection(url, user, pw);
-			String sql = "SELECT * FROM BOARDONE WHERE BOARD_TITLE=?";
+			String sql = "SELECT * FROM BOARD WHERE BOARD_NO=?";
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setString(1,boardTitle);
+			ps.setInt(1,boardno);
 			ResultSet resultSet = ps.executeQuery();
 			
 			if(resultSet.next()) {
-				boardTitle = resultSet.getString("BOARD_TITLE");
+				boardno = resultSet.getInt("BOARD_NO");
+				String boardTitle = resultSet.getString("BOARD_TITLE");
 				String boardText= resultSet.getString("BOARD_TEXT");
-			board = new Board(boardTitle,boardText);
+				int boardhit = resultSet.getInt("BOARD_HIT");
+				boardhit++;
+			board = new Board(boardTitle,boardText,boardhit);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -71,12 +76,24 @@ public class BoardDAO {
 		
 		return board;
 	}
-	
+	public int boardHitUpdate(int boardhit, int boardno) {
+		try {
+			Connection connection = DriverManager.getConnection(url, user, pw);
+			String SQL = "UPDATE BOARD SET BOARD_HIT = ? where BOARD_NO = ?";
+			PreparedStatement ps = connection.prepareStatement(SQL);
+			ps.setInt(1, boardhit);//물음표의 순서
+			ps.setInt(2, boardno);
+			return ps.executeUpdate();//insert,delete,update			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;//데이터베이스 오류
+	}
 	public String image(int boardno) {
 		
 		try {
 			Connection connection = DriverManager.getConnection(url, user, pw);
-			String sql = "SELECT BOARD_FILE FROM BOARDONE WHERE BOARD_NO=?";
+			String sql = "SELECT BOARD_FILE FROM BOARD WHERE BOARD_NO=?";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1,boardno);
 			ResultSet resultSet = ps.executeQuery();
@@ -93,8 +110,44 @@ public class BoardDAO {
 			e.printStackTrace();
 		}return null;
 	}
-
-	
+	public int update(Board board) {
+		Connection connection;
+		String sql = "UPDATE BOARD SET BOARD_TITLE = ?,BOARD_TEXT= ? WHERE BOARD_NO  =?";
+		PreparedStatement ps = null;
+		try {
+			connection = DriverManager.getConnection(url, user, pw);
+			
+			ps = connection.prepareStatement(sql);
+			
+			ps.setString(1,board.getBoardTitle());
+			ps.setString(2,board.getBoardText());
+			ps.setInt(3,board.getBoardno());
+			return ps.executeUpdate();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		
+		}
+	return -1;
+	}
+	public int delete(int boardno) {
+		int result = 0;
+		
+		
+		try {
+			Connection connection = DriverManager.getConnection(url, user, pw);
+			
+			String sql = "DELETE FROM BOARD WHERE BOARD_NO = ?";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, boardno);
+			
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 }
+
 

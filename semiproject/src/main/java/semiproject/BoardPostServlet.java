@@ -17,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 
-@WebServlet("/semiServlet")
+@WebServlet("/BoardPostServlet")
 @MultipartConfig
-public class semiServlet extends HttpServlet {
+public class BoardPostServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url ="jdbc:oracle:thin:@localhost:1521:xe";
@@ -42,7 +42,7 @@ public class semiServlet extends HttpServlet {
 			
 			//ȸ������ \insert
 			
-			String sql = "INSERT INTO BOARDONE(BOARD_TITLE,BOARD_FILE,BOARD_TEXT,ACCOUNT_ID) VALUES(?,?,?,?)";
+			String sql = "INSERT INTO BOARD(BOARD_TITLE,BOARD_FILE,BOARD_TEXT,ACCOUNT_ID) VALUES(?,?,?,?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1,btitle);
 			preparedStatement.setBinaryStream(2, bfile.getInputStream(),(int)bfile.getSize());
@@ -51,12 +51,12 @@ public class semiServlet extends HttpServlet {
 		
 			preparedStatement.executeUpdate();
 		
-			response.sendRedirect("boardList.jsp");
+			response.sendRedirect("BoardList.jsp");
 		
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			response.sendRedirect("register_error.jsp");
+			response.sendRedirect("BoardPost.jsp");
 			e.printStackTrace();
 		}
 		
