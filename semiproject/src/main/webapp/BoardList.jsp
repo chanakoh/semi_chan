@@ -57,11 +57,10 @@
 	            </div>
 	            <div class="main">
                <h1>자유게시판</h1>
-	<table class="table">
+	<table>
 		<tr>
 			<th>번호</th>
-			<th>섬네일</th>
-			<th>글제목</th>
+			<th colspan="2">제목</th>
 			<th>작성일</th>
 			<th>작성자</th>
 			<th>조회수</th>
@@ -83,14 +82,18 @@
 			<td><%=b.getBoardhit()%></td>
 		<%} %>	
 	</table>
-			<button><a href="BoardPost.jsp">글쓰기</a></button>
+			<button type="button" class="custom-btn btn-1" onclick="location.href='BoardPost.jsp'">글쓰기</button>
+			
 	            </div>
+	     
             </div>
-        <footer>
-        
-        </footer>
+       <footer>
+	<p class="foot">회사소개 | 인재채용 | 제휴제안 | 이용약관 | 개인정보처리방침 | 청소년보호정책 | 고객센터 | GAZI Corp.</p>
+	</footer>
         </div>
+        
     </div>
 </body>
+
 </html>
 

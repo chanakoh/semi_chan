@@ -6,7 +6,7 @@
 <html>
 	<head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="./css/board-styles.css">
+	<link rel="stylesheet" href="./css/boardUpdate-styles.css">
 	<title>가지고 싶은 물건, 가지가지 다~ 있다! 가지마켓</title>
 	<script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
 	</head>
@@ -49,7 +49,7 @@
 		        </div>
 	            <div class="main">
                 	<!-- 우측 페이지 --> 
-                	<h1>게시글 작성</h1>
+                	<h1>게시글 수정</h1>
 <%
 
 String boardNoValue = (String)request.getParameter("boardno");
@@ -65,19 +65,17 @@ Board board = boardDao.getBoardno(boardno);
 <table border="1">
 
 <tr>
-<td>제목<td>
-<td><input type="text" name="boardTitle" value="<%=board.getBoardTitle() %>"></td>
+<th>제목<th>
+<input type="text" name="boardTitle" value="<%=board.getBoardTitle() %>" class="btu">
 </tr>
 <tr>
-<th>내용</th>
-<td><textarea rows="20" cols="60" name="boardText"><%=board.getBoardText() %></textarea></td>
+<td>내용</td>
+<td><textarea class="btut" rows="30" cols="100" name="boardText"><%=board.getBoardText() %></textarea></td>
 </tr>
-<tr>
-	<td colspan="2">
-<input type="submit" id="update" value="수정">
-	</td>
-</tr>
+
 </table>
+<input type="submit" id="update" value="수정">
+<button class="cancellationbtn"><a href="BoardList.jsp">취소</a></button>
 </form>
 	            </div>
             </div>

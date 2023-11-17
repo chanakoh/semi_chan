@@ -7,7 +7,7 @@
 <html>
 	<head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="./css/board-styles.css">
+	<link rel="stylesheet" href="./css/boardDetail-styles.css">
 	<title>가지고 싶은 물건, 가지가지 다~ 있다! 가지마켓</title>
 	<script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
 	</head>
@@ -51,7 +51,7 @@
             <div class="contents">
 	            <div class="sidebar">
 	            	<!-- 좌측 메뉴 -->
-		           <button onclick="location.href='BoardList.jsp'">돌아가기</button>  
+		          
 	            </div>
 	            <div class="main">
                 	<!-- 우측 페이지 --> 
@@ -67,30 +67,45 @@ Board board = boardDAO.getBoardno(boardno);
 
 <input type="hidden" name ="boardno" value="<%=boardno %>"><br>
 <tr>
-<th><%= board.getBoardTitle() %></th>
+<td class="t1">제목</th>
+<td><%= board.getBoardTitle() %></th>
 </tr>
 <tr>
-<td><img src="<%=boardDAO.image(boardno)%>" class="img"></td>
-<td><%= board.getBoardText() %></td>
+<td class="t1">작성자</td>
+<td><%= board.getBid() %></td>
 
+</tr>
+<tr>
+<tr>
+<td class="t1">작성일</td>
+<td><%= board.getBoardtime() %></td>
+</tr>
+
+<td colspan="2"><img src="<%=boardDAO.image(boardno)%>" class="img"></td>
+<tr>
+<td colspan="2"><%= board.getBoardText() %></td>
 </tr>
 
 </table>
 
-<button type="button" onclick="location.href='BoardUpdate.jsp?boardno=<%=boardno %>'">수정</button>
+<button type="button" class="custom-btn btn-1" onclick="location.href='BoardUpdate.jsp?boardno=<%=boardno %>'">수정</button>
 
 	<form action="BoardDelete.jsp?boardno=<%=boardno%>" method="post">
-	<button type="submit" id="deleteButton" onclick="Location.href='BoardDelete.jsp?boardno=<%=boardno%>'">삭제</button>
+	<button type="submit" class="custom-btn btn-1" onclick="Location.href='BoardDelete.jsp?boardno=<%=boardno%>'">삭제</button>
 	</form>
-		
+	 <button class="custom-btn btn-1 btn-2" onclick="location.href='BoardList.jsp'">돌아가기</button>  	
 	            </div>
 	          
             </div>
-        <footer>
-        </footer>
+        
         </div>
+     <footer>
+        <p>회사소개 | 인재채용 | 제휴제안 | 이용약관 | 개인정보처리방침 | 청소년보호정책 | 고객센터 | GAZI Corp.</p>
+        </footer>
     </div>
+   
 </body>
+
 </html>
 
   

@@ -24,6 +24,7 @@ public class BoardDAO {
 		}
 		
 	}
+	
 	public List<Board> getAllBoard(){
 		List<Board> boards = new ArrayList<>();
 		try {
@@ -40,9 +41,7 @@ public class BoardDAO {
 				int boardhit = resultSet.getInt("BOARD_HIT");
 				Board board = new Board(boardno,boardTitle,boardtime,bid,boardhit);
 				boards.add(board);
-				
 			}
-			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,9 +64,12 @@ public class BoardDAO {
 				boardno = resultSet.getInt("BOARD_NO");
 				String boardTitle = resultSet.getString("BOARD_TITLE");
 				String boardText= resultSet.getString("BOARD_TEXT");
+				String bid = resultSet.getString("ACCOUNT_ID");
 				int boardhit = resultSet.getInt("BOARD_HIT");
+				Date boardtime = resultSet.getDate("BOARD_TIME");
 				boardhit++;
-			board = new Board(boardTitle,boardText,boardhit);
+				boardHitUpdate(boardhit, boardno);
+			board = new Board(boardTitle,boardText,boardhit,bid,boardtime);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -76,6 +78,8 @@ public class BoardDAO {
 		
 		return board;
 	}
+	
+	
 	public int boardHitUpdate(int boardhit, int boardno) {
 		try {
 			Connection connection = DriverManager.getConnection(url, user, pw);
@@ -89,6 +93,8 @@ public class BoardDAO {
 		}
 		return -1;//데이터베이스 오류
 	}
+	
+	
 	public String image(int boardno) {
 		
 		try {

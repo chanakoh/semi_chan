@@ -15,6 +15,13 @@ public class Board {
 	public Board() {
 		super();
 	}
+	public Board(String boardTitle,String boardText,int boardhit,String bid, Date boardtime) {
+		this.boardTitle = boardTitle;
+		this.boardText = boardText;
+		this.boardhit = boardhit;
+		this.bid = bid;
+		this.boardtime = boardtime;
+	}
 	public Board(String bid) {
 		this.bid = bid;
 	}
@@ -25,6 +32,7 @@ public class Board {
 		this.boardtime = boardtime;
 		this.bid=bid;
 		this.boardhit=boardhit;
+	
 	}	
 	public Board(String boardTitle,String boardText,int boardhit){
 		super();
