@@ -85,13 +85,13 @@ public class BoardDAO {
 			Connection connection = DriverManager.getConnection(url, user, pw);
 			String SQL = "UPDATE BOARD SET BOARD_HIT = ? where BOARD_NO = ?";
 			PreparedStatement ps = connection.prepareStatement(SQL);
-			ps.setInt(1, boardhit);//물음표의 순서
+			ps.setInt(1, boardhit);
 			ps.setInt(2, boardno);
-			return ps.executeUpdate();//insert,delete,update			
+			return ps.executeUpdate();		
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return -1;//데이터베이스 오류
+		return -1;
 	}
 	
 	
