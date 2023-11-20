@@ -3,7 +3,7 @@
 
 <p align="center">
   <br>
-  <img src="img/서른 즈음에.jpg">
+  <img src="readme-static/img/서른 즈음에.jpg">
   <br>
 </p>
 
@@ -69,5 +69,5 @@
 
 <!-- Stack Icon Refernces -->
 
-[js]: ./readme-static/img/javascript.svg
-[java]: ./readme-static/img/java.svg
+[js]: ./readme-static/svg/javascript.svg
+[java]: ./readme-static/svg/java.svg
